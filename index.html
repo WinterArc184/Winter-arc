@@ -33,7 +33,7 @@ let s;try{s={...initial(),...JSON.parse(localStorage.getItem("winterArcFull")||"
 function persist(){localStorage.setItem("winterArcFull",JSON.stringify(s))}
 function idx(){return (new Date().getDay()+6)%7}
 function esc(x){return String(x).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]))}
-const groups={morning:["strecken","20 Liegestütze (oder passende Alternative)","1 Banane","0,5 l Wasser","Eincremen + Gua Sha"],lunch:["Essen","Training – absolvieren","Dehnen","After workout meal"],evening:["1 Stunde spazieren gehen","Essen","Gua sha + Eincremen"]};
+const groups={morning:["strecken","20 Liegestütze (oder passende Alternative)","1 Banane","0,5 l Wasser","Eincremen + Gua Sha"],lunch:["Essen","Training – absolvieren","Dehnen","After workout meal"],evening:["1 Stunde spazieren gehen","Meal","Gua sha + Eincremen"]};
 function all(){return [...(s.current.goal?[s.current.goal]:[]),...groups.morning,...groups.lunch,...groups.evening]}
 function tasks(id,list){$(id).innerHTML=list.map(t=>`<div class="task"><input type="checkbox" data-task="${esc(t)}" ${s.current.checks[t]?"checked":""}><label>${esc(t)}</label></div>`).join("")}
 function renderHome(){tasks("morning",groups.morning);tasks("lunch",groups.lunch);tasks("evening",groups.evening);if(s.current.goal) $("morning").insertAdjacentHTML("afterbegin",`<div class="task"><input type="checkbox" data-task="${esc(s.current.goal)}" ${s.current.checks[s.current.goal]?"checked":""}><label>🎯 ${esc(s.current.goal)}</label></div>`);
